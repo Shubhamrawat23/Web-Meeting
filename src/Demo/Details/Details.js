@@ -5,7 +5,6 @@ export default function Details({className}){
     const [fullName, setFullName] = useState("")
     const [email, setEmail] = useState("")
     const {data,setData,handleCheckboxChange} = useData()
-    console.log(data);
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -45,7 +44,7 @@ export default function Details({className}){
                     <input type="email" 
                     placeholder="Email address" 
                     required 
-                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" 
                     id="userEmail"
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
@@ -64,8 +63,7 @@ export default function Details({className}){
                 <div className="my-[20px]">
                     <input type="checkbox"
                     className="h-[18px] w-[18px]"
-                    id="myself" chec
-                    ked={data.myself} 
+                    id="myself" checked={data.myself} 
                     onChange={(e)=>handleCheckboxChange(e.target.id,e.target.checked)}/>
                     <label htmlFor="myself">🥕 Myself</label>
                 </div>

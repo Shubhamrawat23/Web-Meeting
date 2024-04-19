@@ -10,7 +10,6 @@ export default function Calender({className}){
     const arrOfMonths = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const arrofWeeks = ['MON','TUE','WED','THU','FRI','SAT','SUN']
     const {data, setData} = useData()
-    const [dateSelected, setDateSelected] = useState(false)
 
     
     function getCalenderDate(year,month){
@@ -50,7 +49,7 @@ export default function Calender({className}){
     const allDates = getCalenderDate(pDate.getFullYear(),pDate.getMonth())
 
     const handlePrevMonth = useCallback(()=>{
-        console.log("hello PREV");
+        
         setpDate((prevDate)=>{
             const prevMonth = prevDate.getMonth() - 1
             const prevYear = prevDate.getFullYear() - (prevMonth < 0 ? 1 : 0)
@@ -58,7 +57,7 @@ export default function Calender({className}){
         })
     },[])
     const handleNextMonth = useCallback(()=>{
-        console.log("hello next");
+        
         setpDate((prevDate)=>{
             const prevMonth = prevDate.getMonth() + 1
             const prevYear = prevDate.getFullYear() + (prevMonth > 11 ? 1 : 0)
@@ -67,13 +66,13 @@ export default function Calender({className}){
     },[])
 
     const handleDateClick = (value)=>{
-        setData(prev=>({...prev,date:value,}))
-        setDateSelected(true)
+        setData(prev=>({...prev,date:value}))
     }
+    console.log(data);
 
     return(
-        <div className={`w-[500px] h-[620px] ${className}`}>
-            <p className="font-bold text-[x-large] px-[15px] py-[10px]">Select Date and Time</p>
+        <div className={`w-[500px] h-[620px] ${className} tb:w-[450px]`}>
+            <p className={`font-bold text-[x-large] px-[15px] py-[10px] tb:w-[400px] ${data.date?'tb:px-[30px]':""}`}>Select Date and Time</p>
 
             <FontAwesomeIcon icon={faAngleLeft} className="w-[25px] h-[25px] relative left-[130px] z-[10] top-[23px] text-[#818283] cursor-pointer" onClick={handlePrevMonth} />
 
@@ -82,7 +81,7 @@ export default function Calender({className}){
             <FontAwesomeIcon icon={faAngleRight} className="relative top-[-57px] left-[330px] z-[10] h-[25px] w-[25px] text-[#818283] cursor-pointer" onClick={handleNextMonth} />
 
 
-            <div className="relative top-[-90px] p-[50px]">
+            <div className="relative top-[-90px] p-[50px] tb:left-[0px] tb:top-[-60px] tb:p-[25px]">
 
                 <div className="relative left-[10px] flex justify-evenly">
                     {arrofWeeks.map((value, i) => (
@@ -95,7 +94,7 @@ export default function Calender({className}){
                             {value.map((dateValue, dateValueIndex) => (
                                 <div key={dateValueIndex}
                                     onClick={dateValue && dateValue.getDate() > new Date().getDate() ? () => handleDateClick(dateValue) : null}
-                                    className={`w-[50px] h-[50px] m-[3px] p-[12px] rounded-[100px] text-[#A0A0A0] text-center font-[600] ${dateValue && dateValue.getDate() === new Date().getDate() ? "text-[black]" : ""} ${dateValue && dateValue > new Date() ? "bg-[#CCE5FF] text-[blue] cursor-pointer" : ""} ${dateSelected &&  data.date.getDate()===dateValue.getDate()? "bg-[blue] text-[white]" : ""}`}>   
+                                    className={`w-[50px] h-[50px] m-[3px] p-[12px] rounded-[100px] text-[#A0A0A0] text-center font-[600] ${dateValue && dateValue.getDate() === new Date().getDate() && dateValue.getMonth() === new Date().getMonth()? "text-[black]" : ""} ${dateValue && dateValue > new Date() && dateValue.getMonth() === new Date().getMonth() ? "bg-[#CCE5FF] text-[blue] cursor-pointer" : ""} ${data.date && dateValue && data.date.getDate() === dateValue.getDate() && dateValue.getMonth() === new Date().getMonth() ? "bg-[blue] text-[white]" : ""}`}>   
                                     {dateValue ? dateValue.getDate() : ""}
                                 </div>
                             ))}

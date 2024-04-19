@@ -28,7 +28,7 @@ export default function Confirm({className}){
                     <span className="text-[large]">{data.fullName}</span>
                 </div>
 
-                <div className="relative left-[-65px] top-[45px] text-[#808080] font-[500]">
+                <div className="relative left-[-50px] top-[45px] text-[#808080] font-[500]">
                     <FontAwesomeIcon icon={faCalendar} style={{ color: "#85858a", }} className="px-[10px] w-[25px] h-[25px]"/>
                     <span className="text-[large]">{data.startTime}-{formatEndTime}, {formateDate}</span>
                 </div>
